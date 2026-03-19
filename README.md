@@ -1,4 +1,4 @@
-Technical Implementation & Architectural Trade-offs
+Technical Implementation & Architectural Trade-offs:
 
 1. Framework Selection: Streamlit & LangChain
 Usage: Streamlit handles the UI/Frontend; LangChain orchestrates the AI logic.
@@ -29,3 +29,43 @@ Repercusion of not using: The AI might use its general training data to answer. 
 Usage: st.session_state.chat_history stores the array of messages.
 Why: Streamlit is stateless. Every time you type a message, the script re-runs from line 1. Without session state, the app would "forget" the previous messages every time the screen refreshed.
 Repercusion of not using: The chat UI would only ever show the last message. You could never scroll up to see the previous conversation, and the AI's memory logic would break because the history would be empty on every refresh.
+
+Key Learnings:
+
+Prerequisites
+Python 3.11 or 3.12 (Recommended for stability with Pydantic/LangChain).
+An OpenAI API Key with active credits.
+
+Step 1: Clone & Navigate
+Open your terminal or command prompt and run:
+bash
+git clone https://github.com
+cd InsightStream-Pro
+Use code with caution.
+
+Step 2: Install Dependencies
+It is highly recommended to use a virtual environment to avoid library conflicts:
+bash
+# Create a virtual environment
+python -m venv venv
+
+# Activate it (Windows)
+venv\Scripts\activate
+
+# Activate it (Mac/Linux)
+source venv/bin/activate
+
+# Install the required GenAI stack
+pip install -r requirements.txt
+Use code with caution.
+
+Step 3: Launch the UI
+Start the Streamlit server to open the app in your browser:
+bash
+streamlit run app.py
+Use code with caution.
+
+🛠 Troubleshooting Common Issues
+"ModuleNotFoundError": Ensure you ran pip install -r requirements.txt while your virtual environment was active.
+"Authentication Error (401)": Verify that your OpenAI key is correctly copied into the sidebar and that your account has a positive balance (minimum $5 deposit) [11].
+"Pydantic Version Error": If you see a warning about Pydantic V1, ensure you are running Python 3.11 or 3.12, as Python 3.14+ is not yet fully supported by the LangChain core [1].
