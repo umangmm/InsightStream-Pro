@@ -41,6 +41,8 @@ If you don't use these guardrails in a professional project:
 Liability: In a medical or legal app, giving a "general" answer instead of the "specific" document answer could lead to dangerous real-world consequences.
 Loss of Trust: If a manager asks "What was our Q3 profit?" and the AI gives a generic answer about industry trends instead of the company's actual spreadsheet data, the tool becomes useless.
 
+"By using create_stuff_documents_chain, we transition the LLM from a Generative mode (creative writing) to a Retrieval mode (fact-finding). This ensures the AI acts as a mirror to your data, not a storyteller."
+
 6. State Management: Streamlit Session State
 Usage: st.session_state.chat_history stores the array of messages.
 Why: Streamlit is stateless. Every time you type a message, the script re-runs from line 1. Without session state, the app would "forget" the previous messages every time the screen refreshed.
