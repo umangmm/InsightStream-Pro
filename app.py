@@ -1,13 +1,22 @@
 import streamlit as st
 import os
+
+# New modular package for OpenAI models
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+
+# Community-contributed loaders and vector stores
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import FAISS
+
+# NEW: Standalone package for text splitting (Fixes your specific error)
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+# Core building blocks for chains and history
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, AIMessage
+
 
 # --- 1. Setup & UI ---
 st.set_page_config(page_title="InsightStream Pro", layout="wide")
