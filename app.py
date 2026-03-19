@@ -48,16 +48,25 @@ if api_key:
             f.write(uploaded_file.getbuffer())
 
         # --- 2. Ingestion & RAG Setup (Cached) ---
+        # --- Update this part in your app.py ---
         @st.cache_resource
-        def setup_rag_engine(_file_path):
+        def setup_rag_engine(_file_path, api_key):
+            # Pass the api_key into the embeddings directly
+            embeddings = OpenAIEmbeddings(openai_api_key=api_key) 
+            
             loader = PyPDFLoader(_file_path)
             docs = loader.load()
             splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
             chunks = splitter.split_documents(docs)
-            vector_db = FAISS.from_documents(chunks, OpenAIEmbeddings())
+            
+            vector_db = FAISS.from_documents(chunks, embeddings)
             return vector_db.as_retriever()
+        
+        # --- Update the call to the function as well ---
+        if uploaded_file:
+            # Pass the api_key variable here
+            retriever = setup_rag_engine("temp.pdf", api_key) 
 
-        retriever = setup_rag_engine("temp.pdf")
 
         # --- 3. Contextualizing the Question (Memory Logic) ---
         # This re-writes the user's question to be standalone based on chat history
