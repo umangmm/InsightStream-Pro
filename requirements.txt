@@ -6,4 +6,3 @@ langchain-text-splitters
 pypdf
 faiss-cpu
 tiktoken
-
