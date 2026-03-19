@@ -8,15 +8,17 @@ from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import FAISS
 
-# NEW: Standalone package for text splitting (Fixes your specific error)
+# Standalone package for text splitting
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-# Core building blocks for chains and history
-from langchain.chains.history_aware_retriever import create_history_aware_retriever
-from langchain.chains.retrieval import create_retrieval_chain
-from langchain.chains.combine_documents import create_stuff_documents_chain
+# UPDATED: Use langchain_classic for reliable RAG chain imports
+from langchain_classic.chains import create_history_aware_retriever, create_retrieval_chain
+from langchain_classic.chains.combine_documents import create_stuff_documents_chain
+
+# Core message and prompt structures
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage, AIMessage
+
 
 
 # --- 1. Setup & UI ---
