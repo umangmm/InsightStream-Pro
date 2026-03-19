@@ -25,6 +25,11 @@ from langchain_core.messages import HumanMessage, AIMessage
 st.set_page_config(page_title="InsightStream Pro", layout="wide")
 st.title("🤖 InsightStream Pro: Context-Aware Document Intelligence")
 
+# Add this near the top of app.py
+if "OPENAI_API_KEY" in st.secrets:
+    os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+    api_key = st.secrets["OPENAI_API_KEY"]
+
 with st.sidebar:
     st.header("Configuration")
     api_key = st.text_input("OpenAI API Key", type="password")
