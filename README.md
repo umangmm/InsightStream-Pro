@@ -25,6 +25,22 @@ Usage: create_stuff_documents_chain with a strict System Prompt.
 Why: LLMs are designed to be "helpful," which often leads to "Hallucinations" (confidently making things up). We force the LLM to use only the provided text.
 Repercusion of not using: The AI might use its general training data to answer. In a business or legal setting, this is dangerous—it might provide general legal advice instead of what is actually written in the uploaded contract.
 
+Real-World Example: Legal Contract Review:
+Imagine you upload a NDA (Non-Disclosure Agreement) that says: "The penalty for a leak is ₹5,00,000."
+Scenario A: WITHOUT Guardrails
+User asks: "What is the standard penalty for leaking data?"
+AI Logic: It ignores the PDF and thinks about all the legal blogs it read during training.
+Hallucinated Answer: "Usually, penalties range from ₹1,00,000 to ₹10,00,000 depending on the court." (This is wrong for this specific contract).
+Scenario B: WITH our create_stuff_documents_chain Guardrails
+User asks: "What is the standard penalty for leaking data?"
+AI Logic: It looks at the "stuffed" context. It sees the specific ₹5,00,000 figure.
+Correct Answer: "According to Section 4 of the uploaded document, the penalty is exactly ₹5,00,000."
+
+Repercussions of not using this:
+If you don't use these guardrails in a professional project:
+Liability: In a medical or legal app, giving a "general" answer instead of the "specific" document answer could lead to dangerous real-world consequences.
+Loss of Trust: If a manager asks "What was our Q3 profit?" and the AI gives a generic answer about industry trends instead of the company's actual spreadsheet data, the tool becomes useless.
+
 6. State Management: Streamlit Session State
 Usage: st.session_state.chat_history stores the array of messages.
 Why: Streamlit is stateless. Every time you type a message, the script re-runs from line 1. Without session state, the app would "forget" the previous messages every time the screen refreshed.
