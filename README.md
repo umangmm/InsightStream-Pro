@@ -21,7 +21,8 @@ The Comparison: With vs. Without LangChain:
 With LangChain (Your current code)
 It’s clean and modular. You just define the "links" in the chain.
 python
-# One line handles the entire logic flow
+
+One line handles the entire logic flow:
 rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)
 response = rag_chain.invoke({"input": query, "chat_history": history})
 Use code with caution.
@@ -31,17 +32,17 @@ You have to manually build the prompt string and manage the "messages" array for
 python
 import openai
 
-# 1. Manually search FAISS (not shown, requires manual index querying)
+Manually search FAISS (not shown, requires manual index querying):
 context_chunks = faiss_index.similarity_search(query)
 context_text = "\n".join([c.page_content for c in context_chunks])
 
-# 2. Manually format the chat history for the API
+Manually format the chat history for the API:
 messages = [{"role": "system", "content": f"Use this context: {context_text}"}]
 for msg in chat_history:
     messages.append({"role": msg.type, "content": msg.content})
 messages.append({"role": "user", "content": query})
 
-# 3. Manually call the API and handle the JSON response
+Manually call the API and handle the JSON response:
 response = openai.chat.completions.create(
     model="gpt-4o",
     messages=messages
